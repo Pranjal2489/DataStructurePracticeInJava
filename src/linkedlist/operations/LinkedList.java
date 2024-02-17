@@ -17,7 +17,11 @@ public class LinkedList {
         list.insertAtBegin(1);
         System.out.println("Linked List after Insertion of 1 at beginning");
         list.displayLL();
+        list.insertAfter(list.head.nextAddr.nextAddr,13);
+        System.out.println("LinkedList after insertion of 13 in between");
+        list.displayLL();
     }
+
 
     private class Node {
         int data;
@@ -57,7 +61,16 @@ public class LinkedList {
         head=newNode;
 
     }
-
+    //implementation of insertion of node at any Point
+    private void insertAfter(Node prev_node, int newData) {
+        if(prev_node==null){
+            System.out.println(" the node cannot contain null values");
+            return;
+        }
+        Node newNode=new Node(newData);
+        newNode.nextAddr=prev_node.nextAddr;
+        prev_node.nextAddr=newNode;
+    }
 
 
     private void displayLL() {
