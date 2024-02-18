@@ -26,11 +26,30 @@ public class LinkedList {
         list.reverseIteratively();
         System.out.println("LinkedList after iterative reversal");
         list.displayLL();
+        list.reverseRecursively(list.head, null);
+        System.out.println("LinkedList after recursive reversal");
+        list.displayLL();
+
+        list.middleNode();
+        list.insertAtEnd(19);
+        list.displayLL();
+        list.middleNode();
+
+        list.detectLoop();
+
+
+        //Circular loop creation
+        Node temp= list.head;
+        while (temp.nextAddr!= null){
+            temp=temp.nextAddr;
+        }temp.nextAddr= list.head;
+        //detection of circular loop
+        list.detectLoop();
     }
 
 
 
-    private class Node {
+    private static class Node {
         int data;
         Node nextAddr;
 
@@ -39,19 +58,20 @@ public class LinkedList {
             nextAddr = null;
         }
     }
+    //Declaration of head which points to first node
 
-    //implementation of insertion of node at ending
     Node head;
 
+    //implementation of insertion of node at ending
     private void insertAtEnd(int newData) {
 
-        Node newNode = new Node(newData);
         //case 1 : if ll is empty
         if (head == null) {
             head = new Node(newData);
             return;
         }
         //case2: ll is not empty
+        Node newNode = new Node(newData);
         newNode.nextAddr = null;
         Node temp = head;
         while (temp.nextAddr != null) {
@@ -59,7 +79,6 @@ public class LinkedList {
 
         }
         temp.nextAddr = newNode;
-        return;
 
     }
 
@@ -74,7 +93,7 @@ public class LinkedList {
     //implementation of insertion of node at any Point
     private void insertAfter(Node prev_node, int newData) {
         if (prev_node == null) {
-            System.out.println(" the node cannot contain null values");
+            System.out.println(" the node cannot be inserted as this position does not exist");
             return;
         }
         Node newNode = new Node(newData);
@@ -82,27 +101,36 @@ public class LinkedList {
         prev_node.nextAddr = newNode;
     }
 
+    //implementation of deletion of node at any Point
     private void deleteNode(int position) {
         //if linked list is empty
         if (head == null) {
             return;
         }
+
+
         //otherwise
         Node temp = head;
+
         //deletion at beginning
         if (position == 0) {
             head = temp.nextAddr;
             return;
         }
-//        deletion at any position
+
+        //deletion at any position
         for (int i = 0; i < position-1  && temp != null; i++) {
             temp = temp.nextAddr;
         }
+
         if (temp == null && temp.nextAddr == null) {
             return;
         }
+
         temp.nextAddr = temp.nextAddr.nextAddr;
     }
+
+    //implementation of iteratively reversing of node at any Point
     private void reverseIteratively() {
         Node curr=head;
         Node nextPtr=null;
@@ -116,6 +144,64 @@ public class LinkedList {
         head=prev;
     }
 
+    //implementation of recursively reversing of node at any Point
+    public void reverseRecursively(Node curr,Node prev){
+        //Base Case Condition
+        if (curr.nextAddr==null){
+            head=curr;
+            curr.nextAddr=prev;
+            return;
+        }
+
+
+        Node nextPtr=curr.nextAddr;
+        curr.nextAddr=prev;
+
+        //Recursive function call
+        reverseRecursively(nextPtr,curr);
+
+    }
+
+    //implementation of finding middle of node in the Linked List
+    private void middleNode() {
+        Node slow =head;
+        Node fast =head;
+        while (fast!=null && fast.nextAddr != null){
+            slow = slow.nextAddr;
+            fast = fast.nextAddr.nextAddr;
+
+        }
+        System.out.println("the middle node is "+ slow.data);
+
+    }
+
+    //implementation of detecting a loop in a linked List
+    private  void detectLoop(){
+        Node slow=head;
+        Node fast =head;
+
+        int flag=0;
+        while (slow!=null && fast!= null && fast.nextAddr!=null){
+            slow=slow.nextAddr;
+            fast=fast.nextAddr.nextAddr;
+
+            if (slow==fast){
+                flag=1;
+                break;
+            }
+
+        }
+
+        
+        if (flag==0){
+            System.out.println("no loop Detected");
+        }
+        else {
+            System.out.println("Loop has been detected");
+        }
+    }
+
+    //implementation of displaying a linked list
     private void displayLL() {
         Node current = head;
         while (current != null) {
