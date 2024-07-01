@@ -1,7 +1,7 @@
 package assignment5.divideandconquer;
 
 import java.util.Arrays;
-import java.util.Collection;
+
 import java.util.Collections;
 
 public class DAndC4 {

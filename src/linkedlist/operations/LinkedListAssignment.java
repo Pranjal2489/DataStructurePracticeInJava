@@ -13,7 +13,7 @@ public class LinkedListAssignment {
         }
 
     }
-     Node head;
+    Node head;
     Node header;
     private void insertAtEnd(int newData) {
 

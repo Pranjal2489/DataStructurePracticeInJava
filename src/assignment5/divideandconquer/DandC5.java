@@ -25,7 +25,7 @@ public class DandC5 {
             if (max<arr[i].end)
                 max=arr[i].end;
         }
-        int[] aux=new int[max];
+        int[] aux=new int[max+1];
         for (int i = 0; i < n; i++) {
             int x=arr[i].start;
             int y= arr[i].end;
@@ -33,7 +33,7 @@ public class DandC5 {
             aux[y]--;
             
         }
-        for (int i = 0; i < aux.length; i++) {
+        for (int i = 1; i < aux.length; i++) {
             aux[i]+=aux[i-1];
             if (aux[i]>1)
                 return true;

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class SelectionSort {
     public static void main(String[] args) {
-        int arr[]={60,7,65,33,64,23,66,1};
+        int arr[]={5,2,3,1};
         selectionSort(arr);
         System.out.println("the sorted array is ");
         System.out.printf(Arrays.toString(arr));

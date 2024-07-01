@@ -1,9 +1,6 @@
 package assignment2.arrays2d;
 
 import java.util.Scanner;
-
-//import static jdk.internal.org.jline.keymap.KeyMap.display;
-
 public class PrintMidRC {
     public static void main(String[] args) {
         Scanner scan =new Scanner(System.in);
